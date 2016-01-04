@@ -47,7 +47,7 @@ public class MEFF_Opciones {
     }
    
      public boolean getOptions(){
-         
+        System.out.println("downloading options");
         int trial = ntrials;
         while(trial > 0){
             try {
@@ -59,7 +59,7 @@ public class MEFF_Opciones {
                     if(rows.size()>0){
                          String head=rows.get(0).text();
                          //System.out.println(head);
-                        if(head.substring(0, 4).compareTo("CALL")==0){ 
+                        if(head.substring(0, 4).compareTo("CALL")==0){
                             for(int i=3;i<rows.size()-1;i++){
                                 Elements data = rows.get(i).getElementsByTag("td");
                                 //System.out.println(data.size());

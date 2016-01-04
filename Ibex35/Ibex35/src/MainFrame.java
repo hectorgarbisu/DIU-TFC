@@ -1,17 +1,16 @@
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
+import static java.lang.String.valueOf;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-
 
 public class MainFrame extends javax.swing.JFrame {
 
@@ -38,7 +37,6 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         timData.start();
-        
     }
 
     /**
@@ -61,15 +59,21 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         TablaFuturos = new javax.swing.JTable();
         VentanaOpcionesCALL = new javax.swing.JInternalFrame();
-        jComboBox1 = new javax.swing.JComboBox();
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         TablaOpcionesCALL = new javax.swing.JTable();
+        jComboBox4 = new javax.swing.JComboBox();
+        jComboBox5 = new javax.swing.JComboBox();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         VentanaOpcionesPUT = new javax.swing.JInternalFrame();
         jComboBox2 = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         TablaOpcionesPUT = new javax.swing.JTable();
+        jComboBox3 = new javax.swing.JComboBox();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         Fecha = new javax.swing.JTextField();
         UpdateDataButton = new javax.swing.JButton();
@@ -195,13 +199,11 @@ public class MainFrame extends javax.swing.JFrame {
         VentanaFuturos.getContentPane().setLayout(VentanaFuturosLayout);
         VentanaFuturosLayout.setHorizontalGroup(
             VentanaFuturosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 834, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 976, Short.MAX_VALUE)
         );
         VentanaFuturosLayout.setVerticalGroup(
             VentanaFuturosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(VentanaFuturosLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 184, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         VentanaOpcionesCALL.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -209,10 +211,6 @@ public class MainFrame extends javax.swing.JFrame {
         VentanaOpcionesCALL.setTitle("Opciones IBEX35 - CALL");
         VentanaOpcionesCALL.setToolTipText("Opciones CALL del IBEX35");
         VentanaOpcionesCALL.setVisible(true);
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel1.setText("Fecha de Vencimiento:");
 
         TablaOpcionesCALL.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -243,27 +241,69 @@ public class MainFrame extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(TablaOpcionesCALL);
 
+        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox4ActionPerformed(evt);
+            }
+        });
+        jComboBox4.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jComboBox4PropertyChange(evt);
+            }
+        });
+
+        jComboBox5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox5ActionPerformed(evt);
+            }
+        });
+        jComboBox5.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jComboBox5PropertyChange(evt);
+            }
+        });
+
+        jLabel5.setText("de:");
+
+        jLabel6.setText("hasta:");
+
+        jLabel7.setText("Filtrar por fecha de Vencimiento");
+
         javax.swing.GroupLayout VentanaOpcionesCALLLayout = new javax.swing.GroupLayout(VentanaOpcionesCALL.getContentPane());
         VentanaOpcionesCALL.getContentPane().setLayout(VentanaOpcionesCALLLayout);
         VentanaOpcionesCALLLayout.setHorizontalGroup(
             VentanaOpcionesCALLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VentanaOpcionesCALLLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
+            .addGroup(VentanaOpcionesCALLLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(VentanaOpcionesCALLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(VentanaOpcionesCALLLayout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(VentanaOpcionesCALLLayout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         VentanaOpcionesCALLLayout.setVerticalGroup(
             VentanaOpcionesCALLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(VentanaOpcionesCALLLayout.createSequentialGroup()
                 .addGroup(VentanaOpcionesCALLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
-                .addContainerGap())
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel5)
+                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(VentanaOpcionesCALLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         VentanaOpcionesPUT.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -272,9 +312,18 @@ public class MainFrame extends javax.swing.JFrame {
         VentanaOpcionesPUT.setToolTipText("Opciones PUT del IBEX35");
         VentanaOpcionesPUT.setVisible(true);
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
+        jComboBox2.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jComboBox2PropertyChange(evt);
+            }
+        });
 
-        jLabel2.setText("Fecha de Vencimiento:");
+        jLabel2.setText("Filtrar por fecha de Vencimiento");
 
         TablaOpcionesPUT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -305,27 +354,56 @@ public class MainFrame extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(TablaOpcionesPUT);
 
+        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox3ActionPerformed(evt);
+            }
+        });
+        jComboBox3.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jComboBox3PropertyChange(evt);
+            }
+        });
+
+        jLabel3.setText("de:");
+
+        jLabel4.setText("hasta:");
+
         javax.swing.GroupLayout VentanaOpcionesPUTLayout = new javax.swing.GroupLayout(VentanaOpcionesPUT.getContentPane());
         VentanaOpcionesPUT.getContentPane().setLayout(VentanaOpcionesPUTLayout);
         VentanaOpcionesPUTLayout.setHorizontalGroup(
             VentanaOpcionesPUTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VentanaOpcionesPUTLayout.createSequentialGroup()
+            .addComponent(jScrollPane4)
+            .addGroup(VentanaOpcionesPUTLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(VentanaOpcionesPUTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(VentanaOpcionesPUTLayout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(VentanaOpcionesPUTLayout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(189, 189, 189))
         );
         VentanaOpcionesPUTLayout.setVerticalGroup(
             VentanaOpcionesPUTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(VentanaOpcionesPUTLayout.createSequentialGroup()
                 .addGroup(VentanaOpcionesPUTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
-                .addContainerGap())
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(VentanaOpcionesPUTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout EscritorioLayout = new javax.swing.GroupLayout(Escritorio);
@@ -337,17 +415,13 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(EscritorioLayout.createSequentialGroup()
                         .addComponent(VentanaContado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(VentanaFuturos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(EscritorioLayout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(VentanaFuturos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(EscritorioLayout.createSequentialGroup()
-                                .addComponent(VentanaOpcionesPUT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(VentanaOpcionesCALL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(VentanaOpcionesPUT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(VentanaOpcionesCALL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         EscritorioLayout.setVerticalGroup(
@@ -357,17 +431,13 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(VentanaContado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(VentanaFuturos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(EscritorioLayout.createSequentialGroup()
-                        .addComponent(VentanaOpcionesPUT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EscritorioLayout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(VentanaOpcionesCALL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41))))
+                .addComponent(VentanaFuturos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(VentanaOpcionesCALL)
+                    .addComponent(VentanaOpcionesPUT))
+                .addContainerGap(275, Short.MAX_VALUE))
         );
         Escritorio.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         Escritorio.setLayer(VentanaContado, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -498,6 +568,38 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_FechaActionPerformed
 
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox3ActionPerformed
+
+    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox4ActionPerformed
+
+    private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox5ActionPerformed
+
+    private void jComboBox2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jComboBox2PropertyChange
+        filterCALLOptionsByDate();
+    }//GEN-LAST:event_jComboBox2PropertyChange
+
+    private void jComboBox3PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jComboBox3PropertyChange
+        filterCALLOptionsByDate();
+    }//GEN-LAST:event_jComboBox3PropertyChange
+
+    private void jComboBox4PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jComboBox4PropertyChange
+        filterPUTOptionsByDate();
+    }//GEN-LAST:event_jComboBox4PropertyChange
+
+    private void jComboBox5PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jComboBox5PropertyChange
+        filterPUTOptionsByDate();
+    }//GEN-LAST:event_jComboBox5PropertyChange
+
     /**
      * @param args the command line arguments
      */
@@ -554,10 +656,16 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JInternalFrame VentanaFuturos;
     private javax.swing.JInternalFrame VentanaOpcionesCALL;
     private javax.swing.JInternalFrame VentanaOpcionesPUT;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox jComboBox3;
+    private javax.swing.JComboBox jComboBox4;
+    private javax.swing.JComboBox jComboBox5;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JPanel jPanel1;
@@ -589,14 +697,25 @@ private Float toFloat(String texto){
 
 private void CollectData(){
         try{        
-            ConectionStatusLabel2.setText("actualizando...");
+            ConectionStatusLabel2.setText("actualizando contado");
             //Notificaciones.setText("Recolectando datos ....");   
-
             // actualiza la tabla de contado
+            updateContado();
+            ConectionStatusLabel2.setText("actualizando futuros");
+            updateFutures();
+            ConectionStatusLabel2.setText("actualizando opciones");
+            updateOptions();
+        ConectionStatusLabel2.setText(Fecha.getText());
+        //Notificaciones.setText("Datos disponibles");
+        }catch(NullPointerException e){
+             ConectionStatusLabel2.setText("No se pudo completar la actualizacion");
+        }
+    }
+    private void updateContado(){
             contado.getSpot();
             TableModel model = TablaContado.getModel();
             TablaContado.setValueAt(contado.Spot, 0, 0);
-            //TablaContado.setValueAt(contado.Diferencia, 0, 1);
+            TablaContado.setValueAt(contado.Diferencia, 0, 1);
             TablaContado.setValueAt(contado.Anterior, 0, 2);
             TablaContado.setValueAt(contado.Maximo, 0, 3);
             TablaContado.setValueAt(contado.Minimo, 0, 4);
@@ -611,8 +730,10 @@ private void CollectData(){
             }
             else{
                 model.setValueAt("<html><font color='black'>"+diferencia+"</font></html>", 0, 1);
-          }      
-            futuros.getFutures();
+          }    
+    }
+    private void updateFutures(){
+    futuros.getFutures();
             int nfuturos = futuros.Futuros.size();
             DefaultTableModel tablemodel = (DefaultTableModel)TablaFuturos.getModel();
             tablemodel.setRowCount(nfuturos);
@@ -631,13 +752,84 @@ private void CollectData(){
                 TablaFuturos.setValueAt(f.Anterior, i, 10);
                 TablaFuturos.setValueAt(f.Hora, i, 11);
             }
-        ConectionStatusLabel2.setText(Fecha.getText());
-        //Notificaciones.setText("Datos disponibles");
-        }catch(NullPointerException e){
-             ConectionStatusLabel2.setText("No se pudo conectar");
+    }
+    private void updateOptions() {
+        opciones.getOptions(); 
+        updateOptionsTable();
+        refreshOptionComboBoxes();
+    }
+    
+    private void updateOptionsTable(){
+        int noptions = opciones.Opciones.size();
+        DefaultTableModel tableModelCall = (DefaultTableModel)TablaOpcionesCALL.getModel();
+        DefaultTableModel tableModelPut = (DefaultTableModel)TablaOpcionesPUT.getModel();
+        int minTableSize = Integer.min(tableModelCall.getRowCount(),tableModelPut.getRowCount());
+        int tableSize = Integer.min(noptions,minTableSize);
+        for(int i =0;i<noptions;i++){
+            Opcion o = opciones.Opciones.get(i);
+            if(o.Tipo.compareTo("PUT")==0) //The option is PUT
+                addOptionToTable(tableModelCall, o,i);
+            else if(o.Tipo.compareTo("CALL")==0) //The option is CALL
+                addOptionToTable(tableModelPut,o,i);
+            dateSet.add(o.Vencimiento);
         }
     }
+    
+    private void refreshOptionComboBoxes() {
+        dateSet.add("Inicio del registro");
+        dateSet.add("Fin del registro");
+        for (String item : dateSet) {
+            jComboBox2.addItem(item);
+            jComboBox3.addItem(item);
+            jComboBox4.addItem(item);
+            jComboBox5.addItem(item);
+        }        
+    }
+    private void addOptionToTable(DefaultTableModel tableModel, Opcion o, int i) {
+        int rcount = tableModel.getRowCount();
+        if(rcount>i){
+            tableModel.setValueAt(o.Vencimiento, i, 0);
+            tableModel.setValueAt(o.Compra_Vol, i, 1);
+            tableModel.setValueAt(o.Compra_Precio, i, 2);
+            tableModel.setValueAt(o.Venta_Precio, i, 3);
+            tableModel.setValueAt(o.Venta_Vol, i, 4);
+            tableModel.setValueAt(o.Ultimo, i, 5);
+            tableModel.setValueAt(o.Volumen, i, 6);
+            tableModel.setValueAt(o.Hora, i, 7);
+        }
+        else{
+            Object[] newRow = {o.Vencimiento,o.Compra_Vol,o.Compra_Precio
+                ,o.Venta_Precio,o.Venta_Vol,o.Ultimo,o.Volumen,o.Hora};
+            tableModel.addRow(newRow);
+        }
+    }
+    
+    
+    private void saveAllOpenWallets() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
+    private void filterCALLOptionsByDate() {
+        DefaultTableModel tableModelCall = (DefaultTableModel)TablaOpcionesCALL.getModel();
+        Vector table = tableModelCall.getDataVector();
+        StringDate date;
+        boolean minDateMet = false;
+        boolean maxDateMet = false;
+        for (int i = 0; i < table.size(); i++) {
+            Object row = table.get(i);
+            date = new StringDate((String)((Vector)row).firstElement());
+            if(date==null)continue;
+            if(date.compareTo(currMinDateCALL)==0)minDateMet=true;
+            if(date.compareTo(currMaxDateCALL)==0)minDateMet=true;
+            if(minDateMet==false||maxDateMet==true) table.remove(i);
+        }
+        updateOptionsTable();
+    }
+
+    private void filterPUTOptionsByDate() {
+        DefaultTableModel tableModelPut = (DefaultTableModel)TablaOpcionesPUT.getModel();
+    }
+    
     private void popConfirmExitDialog() {
         if (notSavedChanges){
             Object[] options = {"Guardar y salir", "Salir sin guardar", "Cancelar"};
@@ -657,9 +849,12 @@ private void CollectData(){
             if (ret==0) System.exit(0);
         }
     }
+    String currMinDatePUT = "Inicio del registro";
+    String currMaxDatePUT = "Fin del registro";
+    String currMinDateCALL = "Inicio del registro";
+    String currMaxDateCALL = "Fin del registro";
     boolean notSavedChanges = false;
+    Set<String> dateSet = new HashSet<String>();
 
-    private void saveAllOpenWallets() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
 }
