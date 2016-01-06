@@ -132,7 +132,7 @@
                       <Component id="VentanaOpcionesCALL" max="32767" attributes="0"/>
                       <Component id="VentanaOpcionesPUT" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="275" max="32767" attributes="0"/>
+                  <EmptySpace pref="200" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -407,7 +407,6 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
                               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jComboBox4" min="-2" pref="210" max="-2" attributes="0"/>
@@ -419,6 +418,10 @@
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="saveCallOptionsToWalletButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -436,7 +439,9 @@
                           <Component id="jComboBox5" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jScrollPane3" min="-2" pref="111" max="-2" attributes="0"/>
+                      <Component id="jScrollPane3" min="-2" pref="177" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="saveCallOptionsToWalletButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -453,7 +458,7 @@
                 <Component class="javax.swing.JTable" name="TablaOpcionesCALL">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="8" rowCount="5">
+                      <Table columnCount="8" rowCount="0">
                         <Column editable="false" title="Ejerciico" type="java.lang.String"/>
                         <Column editable="false" title="Vol. Compra" type="java.lang.String"/>
                         <Column editable="false" title="P Compra" type="java.lang.String"/>
@@ -552,6 +557,16 @@
                 <Property name="text" type="java.lang.String" value="Filtrar por fecha de Vencimiento"/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JButton" name="saveCallOptionsToWalletButton">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Guardar Opciones"/>
+                <Property name="toolTipText" type="java.lang.String" value="Guarda las opciones a la cartera abierta actualmente"/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveCallOptionsToWalletButtonActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JInternalFrame" name="VentanaOpcionesPUT">
@@ -573,7 +588,6 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jComboBox2" min="-2" pref="210" max="-2" attributes="0"/>
@@ -585,6 +599,11 @@
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="189" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="savePutOptionsToWalletButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -602,8 +621,10 @@
                           <Component id="jComboBox3" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jScrollPane4" min="-2" pref="113" max="-2" attributes="0"/>
-                      <EmptySpace pref="29" max="32767" attributes="0"/>
+                      <Component id="jScrollPane4" min="-2" pref="179" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="savePutOptionsToWalletButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="21" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -635,7 +656,7 @@
                 <Component class="javax.swing.JTable" name="TablaOpcionesPUT">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="8" rowCount="5">
+                      <Table columnCount="8" rowCount="0">
                         <Column editable="false" title="Ejerciico" type="java.lang.String"/>
                         <Column editable="false" title="Vol. Compra" type="java.lang.String"/>
                         <Column editable="false" title="P Compra" type="java.lang.String"/>
@@ -694,6 +715,9 @@
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="TablaOpcionesPUTPropertyChange"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -717,6 +741,16 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="hasta:"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="savePutOptionsToWalletButton">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Guardiar Opciones"/>
+                <Property name="toolTipText" type="java.lang.String" value="Guarda las opciones a la cartera abierta actualmente"/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="savePutOptionsToWalletButtonActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

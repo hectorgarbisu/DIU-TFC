@@ -1,42 +1,58 @@
 
+import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import static java.lang.String.valueOf;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 public class MainFrame extends javax.swing.JFrame {
 
+
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
+
         initComponents();
-        
+
         setDate();
-        Timer timDate = new Timer(20000,new ActionListener(){ // 20 segundos
+        Timer timDate = new Timer(20000, new ActionListener() { // 20 segundos
             @Override
-            public void actionPerformed(ActionEvent evt){
+            public void actionPerformed(ActionEvent evt) {
                 setDate();
             }
         });
         timDate.start();
-        
+
         CollectData();
-        Timer timData = new Timer(180000,new ActionListener(){ // 3 minutos
+        Timer timData = new Timer(180000, new ActionListener() { // 3 minutos
             @Override
-            public void actionPerformed(ActionEvent evt){
+            public void actionPerformed(ActionEvent evt) {
                 CollectData();
             }
         });
         timData.start();
+        
+        TablaOpcionesPUT.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+        public void valueChanged(ListSelectionEvent event) {
+            if(TablaOpcionesPUT.getSelectedRowCount()==0)
+            savePutOptionsToWalletButton.setEnabled(false);
+            else savePutOptionsToWalletButton.setEnabled(true);
+        }});
+        TablaOpcionesCALL.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+        public void valueChanged(ListSelectionEvent event) {
+            if(TablaOpcionesCALL.getSelectedRowCount()==0)
+            saveCallOptionsToWalletButton.setEnabled(false);
+            else saveCallOptionsToWalletButton.setEnabled(true);
+        }});
     }
 
     /**
@@ -66,6 +82,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        saveCallOptionsToWalletButton = new javax.swing.JButton();
         VentanaOpcionesPUT = new javax.swing.JInternalFrame();
         jComboBox2 = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
@@ -74,6 +91,7 @@ public class MainFrame extends javax.swing.JFrame {
         jComboBox3 = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        savePutOptionsToWalletButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         Fecha = new javax.swing.JTextField();
         UpdateDataButton = new javax.swing.JButton();
@@ -214,11 +232,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         TablaOpcionesCALL.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Ejerciico", "Vol. Compra", "P Compra", "P Venta", "Vol. Venta", "Último", "Volumen", "Hora(Madrid)"
@@ -269,6 +283,15 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel7.setText("Filtrar por fecha de Vencimiento");
 
+        saveCallOptionsToWalletButton.setText("Guardar Opciones");
+        saveCallOptionsToWalletButton.setToolTipText("Guarda las opciones a la cartera abierta actualmente");
+        saveCallOptionsToWalletButton.setEnabled(false);
+        saveCallOptionsToWalletButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveCallOptionsToWalletButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout VentanaOpcionesCALLLayout = new javax.swing.GroupLayout(VentanaOpcionesCALL.getContentPane());
         VentanaOpcionesCALL.getContentPane().setLayout(VentanaOpcionesCALLLayout);
         VentanaOpcionesCALLLayout.setHorizontalGroup(
@@ -280,7 +303,6 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(VentanaOpcionesCALLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(VentanaOpcionesCALLLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -289,6 +311,9 @@ public class MainFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(VentanaOpcionesCALLLayout.createSequentialGroup()
+                .addComponent(saveCallOptionsToWalletButton)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         VentanaOpcionesCALLLayout.setVerticalGroup(
             VentanaOpcionesCALLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,7 +327,9 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(saveCallOptionsToWalletButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -327,11 +354,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         TablaOpcionesPUT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Ejerciico", "Vol. Compra", "P Compra", "P Venta", "Vol. Venta", "Último", "Volumen", "Hora(Madrid)"
@@ -352,6 +375,11 @@ public class MainFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        TablaOpcionesPUT.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                TablaOpcionesPUTPropertyChange(evt);
+            }
+        });
         jScrollPane4.setViewportView(TablaOpcionesPUT);
 
         jComboBox3.addActionListener(new java.awt.event.ActionListener() {
@@ -369,6 +397,15 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel4.setText("hasta:");
 
+        savePutOptionsToWalletButton.setText("Guardiar Opciones");
+        savePutOptionsToWalletButton.setToolTipText("Guarda las opciones a la cartera abierta actualmente");
+        savePutOptionsToWalletButton.setEnabled(false);
+        savePutOptionsToWalletButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                savePutOptionsToWalletButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout VentanaOpcionesPUTLayout = new javax.swing.GroupLayout(VentanaOpcionesPUT.getContentPane());
         VentanaOpcionesPUT.getContentPane().setLayout(VentanaOpcionesPUTLayout);
         VentanaOpcionesPUTLayout.setHorizontalGroup(
@@ -380,7 +417,6 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(VentanaOpcionesPUTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(VentanaOpcionesPUTLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -389,6 +425,10 @@ public class MainFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(189, 189, 189))
+            .addGroup(VentanaOpcionesPUTLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(savePutOptionsToWalletButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         VentanaOpcionesPUTLayout.setVerticalGroup(
             VentanaOpcionesPUTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -402,8 +442,10 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(savePutOptionsToWalletButton)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout EscritorioLayout = new javax.swing.GroupLayout(Escritorio);
@@ -437,7 +479,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(VentanaOpcionesCALL)
                     .addComponent(VentanaOpcionesPUT))
-                .addContainerGap(275, Short.MAX_VALUE))
+                .addContainerGap(200, Short.MAX_VALUE))
         );
         Escritorio.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         Escritorio.setLayer(VentanaContado, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -569,36 +611,60 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_FechaActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        // TODO add your handling code here:
+        currMinDatePUT = (String) jComboBox2.getSelectedItem();
+        filterPUTOptionsByDate();
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
-        // TODO add your handling code here:
+        currMaxDatePUT = (String) jComboBox3.getSelectedItem();
+        filterPUTOptionsByDate();
     }//GEN-LAST:event_jComboBox3ActionPerformed
 
     private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
-        // TODO add your handling code here:
+        currMinDateCALL = (String) jComboBox4.getSelectedItem();
+        filterCALLOptionsByDate();
     }//GEN-LAST:event_jComboBox4ActionPerformed
 
     private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
-        // TODO add your handling code here:
+        currMaxDateCALL = (String) jComboBox5.getSelectedItem();
+        filterCALLOptionsByDate();
     }//GEN-LAST:event_jComboBox5ActionPerformed
 
     private void jComboBox2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jComboBox2PropertyChange
-        filterCALLOptionsByDate();
+
     }//GEN-LAST:event_jComboBox2PropertyChange
 
     private void jComboBox3PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jComboBox3PropertyChange
-        filterCALLOptionsByDate();
+
     }//GEN-LAST:event_jComboBox3PropertyChange
 
     private void jComboBox4PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jComboBox4PropertyChange
-        filterPUTOptionsByDate();
+
     }//GEN-LAST:event_jComboBox4PropertyChange
 
     private void jComboBox5PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jComboBox5PropertyChange
-        filterPUTOptionsByDate();
+
     }//GEN-LAST:event_jComboBox5PropertyChange
+
+    private void savePutOptionsToWalletButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savePutOptionsToWalletButtonActionPerformed
+        int[] rows = TablaOpcionesPUT.getSelectedRows();
+        if(currentlyOpenWallet==-1) popOpenOrCreateWalletDialog();
+//        for (int row : rows) {
+//            currentlyOpenWallet.addOption(callOptionsToShow.Opciones.get(row));
+//        }
+    }//GEN-LAST:event_savePutOptionsToWalletButtonActionPerformed
+
+    private void saveCallOptionsToWalletButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveCallOptionsToWalletButtonActionPerformed
+        int[] rows = TablaOpcionesCALL.getSelectedRows();
+        if(currentlyOpenWallet==-1) popOpenOrCreateWalletDialog();
+//        for (int row : rows) {
+//            currentlyOpenWallet.addOption(putOptionsToShow.Opciones.get(row));
+//        }
+    }//GEN-LAST:event_saveCallOptionsToWalletButtonActionPerformed
+
+    private void TablaOpcionesPUTPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_TablaOpcionesPUTPropertyChange
+
+    }//GEN-LAST:event_TablaOpcionesPUTPropertyChange
 
     /**
      * @param args the command line arguments
@@ -674,13 +740,15 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JButton saveCallOptionsToWalletButton;
+    private javax.swing.JButton savePutOptionsToWalletButton;
     // End of variables declaration//GEN-END:variables
 
-private MEFF_Contado contado = new MEFF_Contado();
-private MEFF_Futuros futuros = new MEFF_Futuros();
-private MEFF_Opciones opciones = new MEFF_Opciones();
+    private MEFF_Contado contado = new MEFF_Contado();
+    private MEFF_Futuros futuros = new MEFF_Futuros();
+    private MEFF_Opciones allAvailableOptions = new MEFF_Opciones();
 
-private void setDate(){
+    private void setDate() {
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy  HH:mm ");
         String formatedDate = sdf.format(date);
@@ -688,15 +756,15 @@ private void setDate(){
         Fecha.setText(formatedDate);
     }
 
-private Float toFloat(String texto){
+    private Float toFloat(String texto) {
 //        if(texto==null) return (float) 0;
         texto = texto.replace(".", "");
         texto = texto.replace(",", ".");
         return Float.valueOf(texto);
     }
 
-private void CollectData(){
-        try{        
+    private void CollectData() {
+        try {
             ConectionStatusLabel2.setText("actualizando contado");
             //Notificaciones.setText("Recolectando datos ....");   
             // actualiza la tabla de contado
@@ -705,150 +773,186 @@ private void CollectData(){
             updateFutures();
             ConectionStatusLabel2.setText("actualizando opciones");
             updateOptions();
-        ConectionStatusLabel2.setText(Fecha.getText());
-        //Notificaciones.setText("Datos disponibles");
-        }catch(NullPointerException e){
-             ConectionStatusLabel2.setText("No se pudo completar la actualizacion");
+            ConectionStatusLabel2.setText(Fecha.getText());
+            //Notificaciones.setText("Datos disponibles");
+        } catch (NullPointerException e) {
+            ConectionStatusLabel2.setText("No se pudo completar la actualizacion");
         }
     }
-    private void updateContado(){
-            contado.getSpot();
-            TableModel model = TablaContado.getModel();
-            TablaContado.setValueAt(contado.Spot, 0, 0);
-            TablaContado.setValueAt(contado.Diferencia, 0, 1);
-            TablaContado.setValueAt(contado.Anterior, 0, 2);
-            TablaContado.setValueAt(contado.Maximo, 0, 3);
-            TablaContado.setValueAt(contado.Minimo, 0, 4);
-            TablaContado.setValueAt(contado.Fecha, 0, 5);
-            TablaContado.setValueAt(contado.Hora, 0, 6);
-            Float diferencia = toFloat(contado.Diferencia);
-            if(diferencia > 0){
-                model.setValueAt("<html><font color='green'>"+diferencia+"</font></html>", 0, 1);
-            }
-            else if(diferencia < 0){
-                 model.setValueAt("<html><font color='red'>"+diferencia+"</font></html>", 0, 1);   
-            }
-            else{
-                model.setValueAt("<html><font color='black'>"+diferencia+"</font></html>", 0, 1);
-          }    
+
+    private void updateContado() {
+        contado.getSpot();
+        TableModel model = TablaContado.getModel();
+        TablaContado.setValueAt(contado.Spot, 0, 0);
+        TablaContado.setValueAt(contado.Diferencia, 0, 1);
+        TablaContado.setValueAt(contado.Anterior, 0, 2);
+        TablaContado.setValueAt(contado.Maximo, 0, 3);
+        TablaContado.setValueAt(contado.Minimo, 0, 4);
+        TablaContado.setValueAt(contado.Fecha, 0, 5);
+        TablaContado.setValueAt(contado.Hora, 0, 6);
+        Float diferencia = toFloat(contado.Diferencia);
+        if (diferencia > 0) {
+            model.setValueAt("<html><font color='green'>" + diferencia + "</font></html>", 0, 1);
+        } else if (diferencia < 0) {
+            model.setValueAt("<html><font color='red'>" + diferencia + "</font></html>", 0, 1);
+        } else {
+            model.setValueAt("<html><font color='black'>" + diferencia + "</font></html>", 0, 1);
+        }
     }
-    private void updateFutures(){
-    futuros.getFutures();
-            int nfuturos = futuros.Futuros.size();
-            DefaultTableModel tablemodel = (DefaultTableModel)TablaFuturos.getModel();
-            tablemodel.setRowCount(nfuturos);
-            for(int i=0;i<nfuturos;i++){
-                Futuro f = futuros.Futuros.get(i);
-                TablaFuturos.setValueAt(f.Vencimiento, i, 0);
-                TablaFuturos.setValueAt(f.Compra_Vol, i, 1);
-                TablaFuturos.setValueAt(f.Compra_Precio, i, 2);
-                TablaFuturos.setValueAt(f.Venta_Precio, i, 3);
-                TablaFuturos.setValueAt(f.Venta_Vol, i, 4);
-                TablaFuturos.setValueAt(f.Ultimo, i, 5);
-                TablaFuturos.setValueAt(f.Volumen, i, 6);
-                TablaFuturos.setValueAt(f.Apertura, i, 7);
-                TablaFuturos.setValueAt(f.Maximo, i, 8);
-                TablaFuturos.setValueAt(f.Minimo, i, 9);
-                TablaFuturos.setValueAt(f.Anterior, i, 10);
-                TablaFuturos.setValueAt(f.Hora, i, 11);
-            }
+
+    private void updateFutures() {
+        futuros.getFutures();
+        int nfuturos = futuros.Futuros.size();
+        DefaultTableModel tablemodel = (DefaultTableModel) TablaFuturos.getModel();
+        tablemodel.setRowCount(nfuturos);
+        for (int i = 0; i < nfuturos; i++) {
+            Futuro f = futuros.Futuros.get(i);
+            TablaFuturos.setValueAt(f.Vencimiento, i, 0);
+            TablaFuturos.setValueAt(f.Compra_Vol, i, 1);
+            TablaFuturos.setValueAt(f.Compra_Precio, i, 2);
+            TablaFuturos.setValueAt(f.Venta_Precio, i, 3);
+            TablaFuturos.setValueAt(f.Venta_Vol, i, 4);
+            TablaFuturos.setValueAt(f.Ultimo, i, 5);
+            TablaFuturos.setValueAt(f.Volumen, i, 6);
+            TablaFuturos.setValueAt(f.Apertura, i, 7);
+            TablaFuturos.setValueAt(f.Maximo, i, 8);
+            TablaFuturos.setValueAt(f.Minimo, i, 9);
+            TablaFuturos.setValueAt(f.Anterior, i, 10);
+            TablaFuturos.setValueAt(f.Hora, i, 11);
+        }
     }
+
     private void updateOptions() {
-        opciones.getOptions(); 
+        allAvailableOptions.getOptions();
+        callOptionsToShow = allAvailableOptions.clone();
+        putOptionsToShow = allAvailableOptions.clone();
         updateOptionsTable();
         refreshOptionComboBoxes();
     }
-    
     private void updateOptionsTable(){
-        int noptions = opciones.Opciones.size();
-        DefaultTableModel tableModelCall = (DefaultTableModel)TablaOpcionesCALL.getModel();
-        DefaultTableModel tableModelPut = (DefaultTableModel)TablaOpcionesPUT.getModel();
-        int minTableSize = Integer.min(tableModelCall.getRowCount(),tableModelPut.getRowCount());
-        int tableSize = Integer.min(noptions,minTableSize);
-        for(int i =0;i<noptions;i++){
-            Opcion o = opciones.Opciones.get(i);
-            if(o.Tipo.compareTo("PUT")==0) //The option is PUT
-                addOptionToTable(tableModelCall, o,i);
-            else if(o.Tipo.compareTo("CALL")==0) //The option is CALL
-                addOptionToTable(tableModelPut,o,i);
+        updateCallOptionsTable();
+        updatePutOptionsTable();
+    }
+    private void updateCallOptionsTable() {
+        int nCallOptions = callOptionsToShow.Opciones.size();
+        DefaultTableModel tableModelCall = new DefaultTableModel(new Object[][]{
+            {null, null, null, null, null, null, null, null}
+        },
+                new String[]{
+                    "Ejerciico", "Vol. Compra", "P Compra", "P Venta", "Vol. Venta", "Último", "Volumen", "Hora(Madrid)"
+                });
+//        DefaultTableModel tableModelCall = (DefaultTableModel) TablaOpcionesCALL.getModel();
+
+        for (int i = 0; i < nCallOptions; i++) {
+            Opcion o = callOptionsToShow.Opciones.get(i);
+            addOptionToTable(tableModelCall, o, i);
             dateSet.add(o.Vencimiento);
         }
+        TablaOpcionesCALL.setModel(tableModelCall);
+
     }
-    
+    private void updatePutOptionsTable(){
+        int nPutOptions = putOptionsToShow.Opciones.size();
+        DefaultTableModel tableModelPut = new DefaultTableModel(new Object[][]{
+            {null, null, null, null, null, null, null, null}
+        },
+                new String[]{
+                    "Ejerciico", "Vol. Compra", "P Compra", "P Venta", "Vol. Venta", "Último", "Volumen", "Hora(Madrid)"
+                });
+//        DefaultTableModel tableModelPut = (DefaultTableModel) TablaOpcionesPUT.getModel();
+        for (int i = 0; i < nPutOptions; i++) {
+            Opcion o = putOptionsToShow.Opciones.get(i);
+            addOptionToTable(tableModelPut, o, i);
+            dateSet.add(o.Vencimiento);
+        }
+
+        TablaOpcionesPUT.setModel(tableModelPut);    
+    }
+
     private void refreshOptionComboBoxes() {
+        jComboBox2.removeAllItems();
+        jComboBox3.removeAllItems();
+        jComboBox4.removeAllItems();
+        jComboBox5.removeAllItems();
         dateSet.add("Inicio del registro");
         dateSet.add("Fin del registro");
-        for (String item : dateSet) {
-            jComboBox2.addItem(item);
-            jComboBox3.addItem(item);
-            jComboBox4.addItem(item);
-            jComboBox5.addItem(item);
-        }        
+        StringDate[] dateArray = StringDate.getSortedArray(dateSet);
+        StringDate item;
+        for (int i = 0; i < dateArray.length; i++) {
+            item = dateArray[i];
+            jComboBox2.addItem(item.toString());
+            jComboBox3.addItem(item.toString());
+            jComboBox4.addItem(item.toString());
+            jComboBox5.addItem(item.toString());
+        }
+        jComboBox3.setSelectedIndex(jComboBox3.getItemCount() - 1);
+        jComboBox5.setSelectedIndex(jComboBox5.getItemCount() - 1);
     }
+
     private void addOptionToTable(DefaultTableModel tableModel, Opcion o, int i) {
         int rcount = tableModel.getRowCount();
-        if(rcount>i){
-            tableModel.setValueAt(o.Vencimiento, i, 0);
-            tableModel.setValueAt(o.Compra_Vol, i, 1);
-            tableModel.setValueAt(o.Compra_Precio, i, 2);
-            tableModel.setValueAt(o.Venta_Precio, i, 3);
-            tableModel.setValueAt(o.Venta_Vol, i, 4);
-            tableModel.setValueAt(o.Ultimo, i, 5);
-            tableModel.setValueAt(o.Volumen, i, 6);
-            tableModel.setValueAt(o.Hora, i, 7);
-        }
-        else{
-            Object[] newRow = {o.Vencimiento,o.Compra_Vol,o.Compra_Precio
-                ,o.Venta_Precio,o.Venta_Vol,o.Ultimo,o.Volumen,o.Hora};
-            tableModel.addRow(newRow);
-        }
+        Object[] newRow = {o.Ejercicio, o.Compra_Vol, o.Compra_Precio, o.Venta_Precio, o.Venta_Vol, o.Ultimo, o.Volumen, o.Hora};
+        tableModel.addRow(newRow);
     }
-    
-    
+
     private void saveAllOpenWallets() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private void filterCALLOptionsByDate() {
-        DefaultTableModel tableModelCall = (DefaultTableModel)TablaOpcionesCALL.getModel();
-        Vector table = tableModelCall.getDataVector();
-        StringDate date;
-        boolean minDateMet = false;
-        boolean maxDateMet = false;
-        for (int i = 0; i < table.size(); i++) {
-            Object row = table.get(i);
-            date = new StringDate((String)((Vector)row).firstElement());
-            if(date==null)continue;
-            if(date.compareTo(currMinDateCALL)==0)minDateMet=true;
-            if(date.compareTo(currMaxDateCALL)==0)minDateMet=true;
-            if(minDateMet==false||maxDateMet==true) table.remove(i);
+        callOptionsToShow = allAvailableOptions.clone();
+        Opcion opt;
+        for (int i = 0; i < callOptionsToShow.Opciones.size(); i++) {
+            opt = callOptionsToShow.Opciones.get(i);
+            if (opt.Tipo.compareTo("CALL")!=0)callOptionsToShow.removeOption(i--);
+            else if (opt.vencimiento.compareTo(currMinDateCALL) < 0
+                    || opt.vencimiento.compareTo(currMaxDateCALL) >= 0) {
+                callOptionsToShow.removeOption(i--);
+            }
         }
-        updateOptionsTable();
+        updateCallOptionsTable();
     }
 
     private void filterPUTOptionsByDate() {
-        DefaultTableModel tableModelPut = (DefaultTableModel)TablaOpcionesPUT.getModel();
+        putOptionsToShow = allAvailableOptions.clone();
+        Opcion opt;
+        for (int i = 0; i < putOptionsToShow.Opciones.size(); i++) {
+            opt = putOptionsToShow.Opciones.get(i);
+            if (opt.Tipo.compareTo("PUT")!=0)putOptionsToShow.removeOption(i--);
+            else if (opt.vencimiento.compareTo(currMinDatePUT) < 0
+                    || opt.vencimiento.compareTo(currMaxDatePUT) >= 0) {
+                putOptionsToShow.removeOption(i--);
+            }
+        }
+        updatePutOptionsTable();
     }
-    
+
     private void popConfirmExitDialog() {
-        if (notSavedChanges){
+        if (notSavedChanges) {
             Object[] options = {"Guardar y salir", "Salir sin guardar", "Cancelar"};
-            int ret = JOptionPane.showOptionDialog(null,"Hay cambios sin guardar\n"
-                    + "¿Desea guardar los cambios antes de salir?","Salir",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,
-                    null,options,options[0]);
-            if (ret==1) System.exit(0); 
-            if (ret==0) {
+            int ret = JOptionPane.showOptionDialog(null, "Hay cambios sin guardar\n"
+                    + "¿Desea guardar los cambios antes de salir?", "Salir", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+                    null, options, options[0]);
+            if (ret == 1) {
+                System.exit(0);
+            }
+            if (ret == 0) {
                 saveAllOpenWallets();
                 System.exit(0);
             }
-            
-        }
-        else{          
-            int ret = JOptionPane.showConfirmDialog(rootPane, 
+
+        } else {
+            int ret = JOptionPane.showConfirmDialog(rootPane,
                     "¿Realmente desea salir?", "Salir", JOptionPane.YES_NO_OPTION);
-            if (ret==0) System.exit(0);
+            if (ret == 0) {
+                System.exit(0);
+            }
         }
     }
+    OptionsWalletManager manager;
+    int currentlyOpenWallet = -1;
+    private MEFF_Opciones callOptionsToShow;
+    private MEFF_Opciones putOptionsToShow;
     String currMinDatePUT = "Inicio del registro";
     String currMaxDatePUT = "Fin del registro";
     String currMinDateCALL = "Inicio del registro";
@@ -856,5 +960,18 @@ private void CollectData(){
     boolean notSavedChanges = false;
     Set<String> dateSet = new HashSet<String>();
 
+    private void popOpenOrCreateWalletDialog() {
+            Object[] options = {"Crear Cartera", "Abrir Cartera", "Cancelar"};
+            int ret = JOptionPane.showOptionDialog(null, "No hay una cartera abierta actualmente\n"
+                    + "¿Qué desea hacer?", " ", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+                    null, options, options[0]);
+            if (ret == 1) {
+                System.out.println("opcion 1");
+            }
+            else if (ret == 0) {
+                System.out.println("opcion 0");
+            }
+            else{System.out.println("opcion 2");}
+    }
 
 }

@@ -32,7 +32,18 @@ public class MEFF_Opciones {
    
     public MEFF_Opciones(){  
     }
+    public MEFF_Opciones(MEFF_Opciones opts){
+        for (Opcion opt : opts.Opciones) {
+            this.Opciones.add(opt);
+        }
+    }
+    public MEFF_Opciones clone(){
+        return new MEFF_Opciones(this);
+    }
     
+    public void removeOption(int index){
+        Opciones.remove(index);
+    }
     private Float toFloat(String texto){
         
         texto = texto.replace(".", "");
@@ -93,7 +104,8 @@ public class MEFF_Opciones {
                                     CALL.Ejercicio     = texto.substring(pos+1);
                                     PUT.Vencimiento   = CALL.Vencimiento;
                                     PUT.Ejercicio     = CALL.Ejercicio;
-                                    
+                                    CALL.vencimiento = new StringDate(CALL.Vencimiento);
+                                    PUT.vencimiento = new StringDate(PUT.Vencimiento);
                                     Opciones.add(CALL);
                                     Opciones.add(PUT);
                                     //System.out.println(data.get(12).text());
@@ -123,5 +135,8 @@ public class MEFF_Opciones {
             }
         }
         return false;
+    }
+    public int getOptionsCount(){
+        return Opciones.size();
     }
 }
