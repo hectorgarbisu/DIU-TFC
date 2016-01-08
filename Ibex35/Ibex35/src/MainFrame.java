@@ -1,11 +1,12 @@
 
-import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.event.ListSelectionEvent;
@@ -1107,7 +1108,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         }
     }
-    OptionsWalletManager manager;
+    OptionsWalletManager manager = new OptionsWalletManager();
     int currentlyOpenWallet = -1;
     private MEFF_Opciones callOptionsToShow;
     private MEFF_Opciones putOptionsToShow;
@@ -1132,10 +1133,22 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private void popOpenWalletWindow() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JFileChooser fc = new JFileChooser();
+        fc.setFileFilter(new WalletFilter());
+        if(fc.showOpenDialog(BarraMenu)==JFileChooser.APPROVE_OPTION){
+            File selectedFile = fc.getSelectedFile();
+            manager.createWallet(selectedFile);
+        }
     }
 
     private void popCreateWalletWindow() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JFileChooser fc = new JFileChooser();
+        fc.setFileFilter(new WalletFilter());
+        fc.showDialog(BarraMenu, "Crear");
+        if(fc.showOpenDialog(BarraMenu)==JFileChooser.APPROVE_OPTION){
+            File selectedFile = fc.getSelectedFile();
+            if(selectedFile.exists())
+            manager.createWallet(selectedFile);
+        }
     }
 }
