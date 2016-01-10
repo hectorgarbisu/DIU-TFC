@@ -25,6 +25,24 @@ public class Opcion {
         this.Ejercicio = opt.Ejercicio;
         this.vencimiento = opt.vencimiento;
     }
+    public Opcion(String str){
+        String[] split = str.split("><");
+        for (String split1 : split) {
+            System.out.println(split1);
+        }
+        this.Tipo = split[0];
+        this.Hora =  split[1];
+        this.Volumen = split[2];
+        this.Ultimo = split[3];
+        this.Compra_Vol = split[4];
+        this.Compra_Precio = split[5];
+        this.Venta_Vol = split[6];
+        this.Venta_Precio = split[7];
+        this.Vencimiento = split[8];
+        this.Ejercicio = split[9];
+        this.Vencimiento = split[10];
+        this.vencimiento = new StringDate(Vencimiento);
+    }
     public Opcion(){
     }
     public boolean isEqual(Opcion opt){
@@ -40,6 +58,21 @@ public class Opcion {
         if(opt.Ejercicio.compareTo(Ejercicio)!=0)return false;
         if(opt.vencimiento.compareTo(vencimiento)!=0)return false;
         return true;
+    }
+    public String toString(){
+        String str = "";
+        str += this.Tipo;
+        str += "><"+this.Hora;
+        str += "><"+this.Volumen;
+        str += "><"+this.Ultimo;
+        str += "><"+this.Compra_Vol;
+        str += "><"+this.Compra_Precio;
+        str += "><"+this.Venta_Vol;
+        str += "><"+this.Venta_Precio;
+        str += "><"+this.Vencimiento;
+        str += "><"+this.Ejercicio;
+        str += "><"+this.vencimiento;
+        return str;
     }
 }
 

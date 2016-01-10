@@ -112,7 +112,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         TablaCartera = new javax.swing.JTable();
-        savePutOptionsToWalletButton1 = new javax.swing.JButton();
+        saveWalletButton = new javax.swing.JButton();
         deleteOptionsButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         Fecha = new javax.swing.JTextField();
@@ -467,7 +467,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(savePutOptionsToWalletButton)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         WalletWindow.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -519,12 +519,12 @@ public class MainFrame extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(TablaCartera);
 
-        savePutOptionsToWalletButton1.setText("Guardiar Cartera");
-        savePutOptionsToWalletButton1.setToolTipText("Guarda las opciones a la cartera abierta actualmente");
-        savePutOptionsToWalletButton1.setEnabled(false);
-        savePutOptionsToWalletButton1.addActionListener(new java.awt.event.ActionListener() {
+        saveWalletButton.setText("Guardiar Cartera");
+        saveWalletButton.setToolTipText("Guarda las opciones a la cartera abierta actualmente");
+        saveWalletButton.setEnabled(false);
+        saveWalletButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                savePutOptionsToWalletButton1ActionPerformed(evt);
+                saveWalletButtonActionPerformed(evt);
             }
         });
 
@@ -549,7 +549,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(savePutOptionsToWalletButton1))
+                        .addComponent(saveWalletButton))
                     .addComponent(deleteOptionsButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -559,12 +559,12 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(WalletWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(savePutOptionsToWalletButton1))
+                    .addComponent(saveWalletButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(deleteOptionsButton)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout EscritorioLayout = new javax.swing.GroupLayout(Escritorio);
@@ -637,7 +637,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(857, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(ConectionStatusLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ConectionStatusLabel2)
@@ -681,7 +681,13 @@ public class MainFrame extends javax.swing.JFrame {
         });
         jMenu1.add(CreateWalletMenuItem);
 
-        SaveWalletMenuItem.setText("Guardar Cartera");
+        SaveWalletMenuItem.setText("Guardar Carteras");
+        SaveWalletMenuItem.setEnabled(false);
+        SaveWalletMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveWalletMenuItemActionPerformed(evt);
+            }
+        });
         jMenu1.add(SaveWalletMenuItem);
 
         ExitAppMenuItem.setText("Salir");
@@ -715,7 +721,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(221, Short.MAX_VALUE))
+                .addContainerGap(189, Short.MAX_VALUE))
         );
 
         pack();
@@ -794,6 +800,7 @@ public class MainFrame extends javax.swing.JFrame {
             manager.addOptionToCurrentWallet(putOptionsToShow.Opciones.get(row-1));
         }
         showWalletOnTable(manager.getCurrentWalletIndex());
+        saveWalletButton.setEnabled(true);
     }//GEN-LAST:event_savePutOptionsToWalletButtonActionPerformed
 
     private void saveCallOptionsToWalletButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveCallOptionsToWalletButtonActionPerformed
@@ -809,6 +816,7 @@ public class MainFrame extends javax.swing.JFrame {
             manager.addOptionToCurrentWallet(callOptionsToShow.Opciones.get(row-1));
         }
         showWalletOnTable(manager.getCurrentWalletIndex());
+        saveWalletButton.setEnabled(true);
     }//GEN-LAST:event_saveCallOptionsToWalletButtonActionPerformed
 
     private void TablaOpcionesPUTPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_TablaOpcionesPUTPropertyChange
@@ -832,9 +840,10 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TablaCarteraPropertyChange
 
-    private void savePutOptionsToWalletButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savePutOptionsToWalletButton1ActionPerformed
+    private void saveWalletButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveWalletButtonActionPerformed
         notSavedChanges = false;
-    }//GEN-LAST:event_savePutOptionsToWalletButton1ActionPerformed
+        manager.saveCurrentWalletToFile();
+    }//GEN-LAST:event_saveWalletButtonActionPerformed
 
     private void deleteOptionsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteOptionsButtonActionPerformed
         deleteOptionsFromWallet();
@@ -845,6 +854,10 @@ public class MainFrame extends javax.swing.JFrame {
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
         popOpenWalletWindow();
     }//GEN-LAST:event_jMenu1ActionPerformed
+
+    private void SaveWalletMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveWalletMenuItemActionPerformed
+        manager.saveAllWalletsToFile();
+    }//GEN-LAST:event_SaveWalletMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -928,7 +941,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JButton saveCallOptionsToWalletButton;
     private javax.swing.JButton savePutOptionsToWalletButton;
-    private javax.swing.JButton savePutOptionsToWalletButton1;
+    private javax.swing.JButton saveWalletButton;
     // End of variables declaration//GEN-END:variables
 
     private MEFF_Contado contado = new MEFF_Contado();
@@ -1086,7 +1099,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private void saveAllOpenWallets() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        manager.saveAllWalletsToFile();
     }
 
     private void filterCALLOptionsByDate() {
@@ -1171,8 +1184,12 @@ public class MainFrame extends javax.swing.JFrame {
         fc.setFileFilter(new WalletFilter());
         if (fc.showOpenDialog(BarraMenu) == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fc.getSelectedFile();
-            manager.createWallet(selectedFile);
+            manager.openWallet(selectedFile);
             updateWalletWindow();
+            SaveWalletMenuItem.setEnabled(true);
+            currentlyOpenWallet = manager.getCurrentWalletIndex();
+            SaveWalletMenuItem.setEnabled(true);
+            saveWalletButton.setEnabled(true);
         }
     }
 
@@ -1185,11 +1202,10 @@ public class MainFrame extends javax.swing.JFrame {
                 //File already exists
                 //popOverwriteMessage
             }else{
-                System.out.println("creando cartera");
                 manager.createWallet(selectedFile);
                 currentlyOpenWallet = manager.getCurrentWalletIndex();
-                System.out.println(currentlyOpenWallet);
                 updateWalletWindow();
+                SaveWalletMenuItem.setEnabled(true);
             }
         }
     }

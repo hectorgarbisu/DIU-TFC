@@ -30,8 +30,12 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="SaveWalletMenuItem">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Guardar Cartera"/>
+                <Property name="text" type="java.lang.String" value="Guardar Carteras"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SaveWalletMenuItemActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="ExitAppMenuItem">
               <Properties>
@@ -95,7 +99,7 @@
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="Escritorio" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="221" max="32767" attributes="0"/>
+              <EmptySpace pref="189" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -640,7 +644,7 @@
                       <Component id="jScrollPane4" min="-2" pref="179" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="savePutOptionsToWalletButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="47" max="32767" attributes="0"/>
+                      <EmptySpace pref="67" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -791,7 +795,7 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jComboBox6" min="-2" pref="210" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="savePutOptionsToWalletButton1" min="-2" max="-2" attributes="0"/>
+                              <Component id="saveWalletButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="deleteOptionsButton" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -805,13 +809,13 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jComboBox6" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="savePutOptionsToWalletButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="saveWalletButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane5" min="-2" pref="190" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="deleteOptionsButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="44" max="32767" attributes="0"/>
+                      <EmptySpace pref="64" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -910,14 +914,14 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="savePutOptionsToWalletButton1">
+            <Component class="javax.swing.JButton" name="saveWalletButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Guardiar Cartera"/>
                 <Property name="toolTipText" type="java.lang.String" value="Guarda las opciones a la cartera abierta actualmente"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="savePutOptionsToWalletButton1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveWalletButtonActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="deleteOptionsButton">
