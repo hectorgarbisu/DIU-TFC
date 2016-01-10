@@ -17,6 +17,9 @@ public class OptionsWallet {
     public Opcion[] getOptionsAsArray(){
         return (Opcion[]) options.toArray();
     }
+    public ArrayList<Opcion> getOptions(){
+        return options;
+    }
     public void removeOption(Opcion opt){
         removeOption(opt,1);
     }
@@ -43,5 +46,12 @@ public class OptionsWallet {
     }
     
     public void saveToFile(String path){
+    }
+
+    void removeOptions(int[] rows) {
+        for (int row : rows) {
+            if(row>0&&row<options.size()+1)
+            options.remove(row-1);
+        }
     }
 }

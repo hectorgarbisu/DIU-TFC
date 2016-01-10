@@ -16,7 +16,6 @@ import javax.swing.table.TableModel;
 
 public class MainFrame extends javax.swing.JFrame {
 
-
     /**
      * Creates new form MainFrame
      */
@@ -41,25 +40,34 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         timData.start();
-        
-        TablaOpcionesPUT.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-        public void valueChanged(ListSelectionEvent event) {
-            if(TablaOpcionesPUT.getSelectedRowCount()==0)
-            savePutOptionsToWalletButton.setEnabled(false);
-            else savePutOptionsToWalletButton.setEnabled(true);
-        }});
-        TablaOpcionesCALL.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-        public void valueChanged(ListSelectionEvent event) {
-            if(TablaOpcionesCALL.getSelectedRowCount()==0)
-            saveCallOptionsToWalletButton.setEnabled(false);
-            else saveCallOptionsToWalletButton.setEnabled(true);
-        }});
-        TablaCartera.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-        public void valueChanged(ListSelectionEvent event) {
-            if(TablaCartera.getSelectedRowCount()==0)
-            deleteOptionsButton.setEnabled(false);
-            else saveCallOptionsToWalletButton.setEnabled(true);
-        }});
+
+        TablaOpcionesPUT.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent event) {
+                if (TablaOpcionesPUT.getSelectedRowCount() == 0) {
+                    savePutOptionsToWalletButton.setEnabled(false);
+                } else {
+                    savePutOptionsToWalletButton.setEnabled(true);
+                }
+            }
+        });
+        TablaOpcionesCALL.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent event) {
+                if (TablaOpcionesCALL.getSelectedRowCount() == 0) {
+                    saveCallOptionsToWalletButton.setEnabled(false);
+                } else {
+                    saveCallOptionsToWalletButton.setEnabled(true);
+                }
+            }
+        });
+        TablaCartera.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent event) {
+                if (TablaCartera.getSelectedRowCount() == 0) {
+                    deleteOptionsButton.setEnabled(false);
+                } else {
+                    deleteOptionsButton.setEnabled(true);
+                }
+            }
+        });
     }
 
     /**
@@ -775,19 +783,32 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void savePutOptionsToWalletButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savePutOptionsToWalletButtonActionPerformed
         int[] rows = TablaOpcionesPUT.getSelectedRows();
-        if(currentlyOpenWallet==-1) popOpenOrCreateWalletDialog();
+        if (currentlyOpenWallet == -1) {
+            int ret = popOpenOrCreateWalletDialog();
+            if(ret <0 ||ret >1) return;
+        }           
         notSavedChanges = true;
-//        for (int row : rows) {
-//            currentlyOpenWallet.addOption(callOptionsToShow.Opciones.get(row));
-//        }
+        for (int row : rows) {
+            System.out.println(row);
+            if(row>0)
+            manager.addOptionToCurrentWallet(putOptionsToShow.Opciones.get(row-1));
+        }
+        showWalletOnTable(manager.getCurrentWalletIndex());
     }//GEN-LAST:event_savePutOptionsToWalletButtonActionPerformed
 
     private void saveCallOptionsToWalletButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveCallOptionsToWalletButtonActionPerformed
         int[] rows = TablaOpcionesCALL.getSelectedRows();
-        if(currentlyOpenWallet==-1) popOpenOrCreateWalletDialog();
-//        for (int row : rows) {
-//            currentlyOpenWallet.addOption(putOptionsToShow.Opciones.get(row));
-//        }
+        if (currentlyOpenWallet == -1) {
+            int ret = popOpenOrCreateWalletDialog();
+            if(ret <0 ||ret >1) return;
+        }
+        notSavedChanges = true;
+        for (int row : rows) {
+            System.out.println(row);
+            if(row>0)
+            manager.addOptionToCurrentWallet(callOptionsToShow.Opciones.get(row-1));
+        }
+        showWalletOnTable(manager.getCurrentWalletIndex());
     }//GEN-LAST:event_saveCallOptionsToWalletButtonActionPerformed
 
     private void TablaOpcionesPUTPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_TablaOpcionesPUTPropertyChange
@@ -795,7 +816,12 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_TablaOpcionesPUTPropertyChange
 
     private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox6ActionPerformed
-        // TODO add your handling code here:
+        int curr = jComboBox6.getSelectedIndex();
+        if(curr<0)return;
+        currentlyOpenWallet = curr;
+        manager.setCurrentWallet(curr);
+        currentlyOpenWallet = curr;
+        updateWalletWindow();
     }//GEN-LAST:event_jComboBox6ActionPerformed
 
     private void jComboBox6PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jComboBox6PropertyChange
@@ -811,7 +837,9 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_savePutOptionsToWalletButton1ActionPerformed
 
     private void deleteOptionsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteOptionsButtonActionPerformed
+        deleteOptionsFromWallet();
         notSavedChanges = true;
+        
     }//GEN-LAST:event_deleteOptionsButtonActionPerformed
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
@@ -988,10 +1016,12 @@ public class MainFrame extends javax.swing.JFrame {
         updateOptionsTable();
         refreshOptionComboBoxes();
     }
-    private void updateOptionsTable(){
+
+    private void updateOptionsTable() {
         updateCallOptionsTable();
         updatePutOptionsTable();
     }
+
     private void updateCallOptionsTable() {
         int nCallOptions = callOptionsToShow.Opciones.size();
         DefaultTableModel tableModelCall = new DefaultTableModel(new Object[][]{
@@ -1010,7 +1040,8 @@ public class MainFrame extends javax.swing.JFrame {
         TablaOpcionesCALL.setModel(tableModelCall);
 
     }
-    private void updatePutOptionsTable(){
+
+    private void updatePutOptionsTable() {
         int nPutOptions = putOptionsToShow.Opciones.size();
         DefaultTableModel tableModelPut = new DefaultTableModel(new Object[][]{
             {null, null, null, null, null, null, null, null}
@@ -1025,7 +1056,7 @@ public class MainFrame extends javax.swing.JFrame {
             dateSet.add(o.Vencimiento);
         }
 
-        TablaOpcionesPUT.setModel(tableModelPut);    
+        TablaOpcionesPUT.setModel(tableModelPut);
     }
 
     private void refreshOptionComboBoxes() {
@@ -1063,8 +1094,9 @@ public class MainFrame extends javax.swing.JFrame {
         Opcion opt;
         for (int i = 0; i < callOptionsToShow.Opciones.size(); i++) {
             opt = callOptionsToShow.Opciones.get(i);
-            if (opt.Tipo.compareTo("CALL")!=0)callOptionsToShow.removeOption(i--);
-            else if (opt.vencimiento.compareTo(currMinDateCALL) < 0
+            if (opt.Tipo.compareTo("CALL") != 0) {
+                callOptionsToShow.removeOption(i--);
+            } else if (opt.vencimiento.compareTo(currMinDateCALL) < 0
                     || opt.vencimiento.compareTo(currMaxDateCALL) > 0) {
                 callOptionsToShow.removeOption(i--);
             }
@@ -1077,8 +1109,9 @@ public class MainFrame extends javax.swing.JFrame {
         Opcion opt;
         for (int i = 0; i < putOptionsToShow.Opciones.size(); i++) {
             opt = putOptionsToShow.Opciones.get(i);
-            if (opt.Tipo.compareTo("PUT")!=0)putOptionsToShow.removeOption(i--);
-            else if (opt.vencimiento.compareTo(currMinDatePUT) < 0
+            if (opt.Tipo.compareTo("PUT") != 0) {
+                putOptionsToShow.removeOption(i--);
+            } else if (opt.vencimiento.compareTo(currMinDatePUT) < 0
                     || opt.vencimiento.compareTo(currMaxDatePUT) > 0) {
                 putOptionsToShow.removeOption(i--);
             }
@@ -1118,37 +1151,84 @@ public class MainFrame extends javax.swing.JFrame {
     String currMaxDateCALL = "Fin del registro";
     boolean notSavedChanges = false;
     Set<String> dateSet = new HashSet<String>();
-    private void popOpenOrCreateWalletDialog() {
-            Object[] options = {"Crear Cartera", "Abrir Cartera", "Cancelar"};
-            int ret = JOptionPane.showOptionDialog(null, "No hay una cartera abierta actualmente\n"
-                    + "¿Qué desea hacer?", " ", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
-                    null, options, options[0]);
-            if (ret == 1) {
-                popOpenWalletWindow();
-            }
-            else if (ret == 0) {
-                popCreateWalletWindow();
-            }
-            else{}
+
+    private int popOpenOrCreateWalletDialog() {
+        Object[] options = {"Crear Cartera", "Abrir Cartera", "Cancelar"};
+        int ret = JOptionPane.showOptionDialog(null, "No hay una cartera abierta actualmente\n"
+                + "¿Qué desea hacer?", " ", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+                null, options, options[0]);
+        if (ret == 1) {
+            popOpenWalletWindow();
+        } else if (ret == 0) {
+            popCreateWalletWindow();
+        } else {
+        }
+        return ret;
     }
 
     private void popOpenWalletWindow() {
         JFileChooser fc = new JFileChooser();
         fc.setFileFilter(new WalletFilter());
-        if(fc.showOpenDialog(BarraMenu)==JFileChooser.APPROVE_OPTION){
+        if (fc.showOpenDialog(BarraMenu) == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fc.getSelectedFile();
             manager.createWallet(selectedFile);
+            updateWalletWindow();
         }
     }
 
     private void popCreateWalletWindow() {
         JFileChooser fc = new JFileChooser();
         fc.setFileFilter(new WalletFilter());
-        fc.showDialog(BarraMenu, "Crear");
-        if(fc.showOpenDialog(BarraMenu)==JFileChooser.APPROVE_OPTION){
+        if (fc.showDialog(BarraMenu, "Crear") == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fc.getSelectedFile();
-            if(selectedFile.exists())
-            manager.createWallet(selectedFile);
+            if (selectedFile.exists()||manager.pathExists(selectedFile.getAbsolutePath())){
+                //File already exists
+                //popOverwriteMessage
+            }else{
+                System.out.println("creando cartera");
+                manager.createWallet(selectedFile);
+                currentlyOpenWallet = manager.getCurrentWalletIndex();
+                System.out.println(currentlyOpenWallet);
+                updateWalletWindow();
+            }
         }
+    }
+
+    private void updateWalletWindow() {
+        if(manager.getWalletCount()<1) return;
+        updateWalletComboBox();
+        showWalletOnTable(currentlyOpenWallet);
+    }
+
+    private void updateWalletComboBox() {
+        jComboBox6.removeAllItems();
+        for(int i=0;i<manager.getWalletCount();i++){
+            jComboBox6.addItem(manager.getName(i));
+        }
+        jComboBox6.setSelectedIndex(currentlyOpenWallet);
+        System.out.println("element "+currentlyOpenWallet);
+    }
+
+    private void showWalletOnTable(int idx) {
+        if(idx<0) return;
+        DefaultTableModel tableModelWallet = new DefaultTableModel(new Object[][]{
+            {null, null, null, null, null, null, null, null}
+        },
+        new String[]{
+            "Tipo", "Ejercicio", "Vol. Compra", "P Compra", "P Venta", "Vol. Venta", "Último", "Volumen", "Fecha vencimiento", "Hora(Madrid)"
+        });
+        OptionsWallet wallet = manager.getCurrentWallet();
+        for (Opcion o : wallet.getOptions()) {
+            Object[] newRow = {o.Tipo, o.Ejercicio, o.Compra_Vol, o.Compra_Precio,
+                o.Venta_Precio, o.Venta_Vol, o.Ultimo, o.Volumen, o.Vencimiento, o.Hora};
+            tableModelWallet.addRow(newRow);
+        }
+        TablaCartera.setModel(tableModelWallet);
+    }
+
+    private void deleteOptionsFromWallet() {
+        int[] rows = TablaCartera.getSelectedRows();
+        manager.removeOptionsFromCurrentWallet(rows);
+        showWalletOnTable(currentlyOpenWallet);
     }
 }
