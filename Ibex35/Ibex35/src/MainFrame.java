@@ -125,10 +125,9 @@ public class MainFrame extends javax.swing.JFrame {
         CreateWalletMenuItem = new javax.swing.JMenuItem();
         SaveWalletMenuItem = new javax.swing.JMenuItem();
         ExitAppMenuItem = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Cartera de Opciones del IBEX35");
+        setTitle("Gestor de Opciones Ibex35");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/euro.png")).getImage());
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -318,7 +317,7 @@ public class MainFrame extends javax.swing.JFrame {
         VentanaOpcionesCALL.getContentPane().setLayout(VentanaOpcionesCALLLayout);
         VentanaOpcionesCALLLayout.setHorizontalGroup(
             VentanaOpcionesCALLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
+            .addComponent(jScrollPane3)
             .addGroup(VentanaOpcionesCALLLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel7)
@@ -432,24 +431,24 @@ public class MainFrame extends javax.swing.JFrame {
         VentanaOpcionesPUT.getContentPane().setLayout(VentanaOpcionesPUTLayout);
         VentanaOpcionesPUTLayout.setHorizontalGroup(
             VentanaOpcionesPUTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4)
-            .addGroup(VentanaOpcionesPUTLayout.createSequentialGroup()
-                .addContainerGap(46, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(VentanaOpcionesPUTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(VentanaOpcionesPUTLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(VentanaOpcionesPUTLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(189, 189, 189))
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
             .addGroup(VentanaOpcionesPUTLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(savePutOptionsToWalletButton)
+                .addGroup(VentanaOpcionesPUTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(VentanaOpcionesPUTLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(VentanaOpcionesPUTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(VentanaOpcionesPUTLayout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(VentanaOpcionesPUTLayout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(savePutOptionsToWalletButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         VentanaOpcionesPUTLayout.setVerticalGroup(
@@ -467,7 +466,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(savePutOptionsToWalletButton)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         WalletWindow.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -564,7 +563,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(deleteOptionsButton)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout EscritorioLayout = new javax.swing.GroupLayout(Escritorio);
@@ -576,15 +575,15 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(EscritorioLayout.createSequentialGroup()
                         .addComponent(VentanaContado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 247, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(EscritorioLayout.createSequentialGroup()
+                        .addComponent(VentanaOpcionesPUT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(VentanaOpcionesCALL))
                     .addGroup(EscritorioLayout.createSequentialGroup()
                         .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(VentanaFuturos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(EscritorioLayout.createSequentialGroup()
-                                .addComponent(VentanaOpcionesPUT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(VentanaOpcionesCALL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(WalletWindow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -600,11 +599,11 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(VentanaFuturos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(VentanaOpcionesPUT)
-                    .addComponent(VentanaOpcionesCALL))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(VentanaOpcionesCALL)
+                    .addComponent(VentanaOpcionesPUT))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(WalletWindow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         Escritorio.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         Escritorio.setLayer(VentanaContado, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -700,9 +699,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         BarraMenu.add(jMenu1);
 
-        jMenu2.setText("Editar");
-        BarraMenu.add(jMenu2);
-
         setJMenuBar(BarraMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -721,7 +717,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -751,77 +747,32 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_FechaActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        currMinDatePUT = (String) jComboBox2.getSelectedItem();
-        filterPUTOptionsByDate();
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+        popOpenWalletWindow();
+    }//GEN-LAST:event_jMenu1ActionPerformed
 
-    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
-        currMaxDatePUT = (String) jComboBox3.getSelectedItem();
-        filterPUTOptionsByDate();
-    }//GEN-LAST:event_jComboBox3ActionPerformed
+    private void SaveWalletMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveWalletMenuItemActionPerformed
+        manager.saveAllWalletsToFile();
+    }//GEN-LAST:event_SaveWalletMenuItemActionPerformed
 
-    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
-        currMinDateCALL = (String) jComboBox4.getSelectedItem();
-        filterCALLOptionsByDate();
-    }//GEN-LAST:event_jComboBox4ActionPerformed
-
-    private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
-        currMaxDateCALL = (String) jComboBox5.getSelectedItem();
-        filterCALLOptionsByDate();
-    }//GEN-LAST:event_jComboBox5ActionPerformed
-
-    private void jComboBox2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jComboBox2PropertyChange
-
-    }//GEN-LAST:event_jComboBox2PropertyChange
-
-    private void jComboBox3PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jComboBox3PropertyChange
-
-    }//GEN-LAST:event_jComboBox3PropertyChange
-
-    private void jComboBox4PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jComboBox4PropertyChange
-
-    }//GEN-LAST:event_jComboBox4PropertyChange
-
-    private void jComboBox5PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jComboBox5PropertyChange
-
-    }//GEN-LAST:event_jComboBox5PropertyChange
-
-    private void savePutOptionsToWalletButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savePutOptionsToWalletButtonActionPerformed
-        int[] rows = TablaOpcionesPUT.getSelectedRows();
-        if (currentlyOpenWallet == -1) {
-            int ret = popOpenOrCreateWalletDialog();
-            if(ret <0 ||ret >1) return;
-        }           
+    private void deleteOptionsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteOptionsButtonActionPerformed
+        deleteOptionsFromWallet();
         notSavedChanges = true;
-        for (int row : rows) {
-            System.out.println(row);
-            if(row>0)
-            manager.addOptionToCurrentWallet(putOptionsToShow.Opciones.get(row-1));
-        }
-        showWalletOnTable(manager.getCurrentWalletIndex());
-        saveWalletButton.setEnabled(true);
-    }//GEN-LAST:event_savePutOptionsToWalletButtonActionPerformed
 
-    private void saveCallOptionsToWalletButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveCallOptionsToWalletButtonActionPerformed
-        int[] rows = TablaOpcionesCALL.getSelectedRows();
-        if (currentlyOpenWallet == -1) {
-            int ret = popOpenOrCreateWalletDialog();
-            if(ret <0 ||ret >1) return;
-        }
-        notSavedChanges = true;
-        for (int row : rows) {
-            System.out.println(row);
-            if(row>0)
-            manager.addOptionToCurrentWallet(callOptionsToShow.Opciones.get(row-1));
-        }
-        showWalletOnTable(manager.getCurrentWalletIndex());
-        saveWalletButton.setEnabled(true);
-    }//GEN-LAST:event_saveCallOptionsToWalletButtonActionPerformed
+    }//GEN-LAST:event_deleteOptionsButtonActionPerformed
 
-    private void TablaOpcionesPUTPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_TablaOpcionesPUTPropertyChange
+    private void saveWalletButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveWalletButtonActionPerformed
+        notSavedChanges = false;
+        manager.saveCurrentWalletToFile();
+    }//GEN-LAST:event_saveWalletButtonActionPerformed
 
-    }//GEN-LAST:event_TablaOpcionesPUTPropertyChange
+    private void TablaCarteraPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_TablaCarteraPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TablaCarteraPropertyChange
+
+    private void jComboBox6PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jComboBox6PropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox6PropertyChange
 
     private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox6ActionPerformed
         int curr = jComboBox6.getSelectedIndex();
@@ -832,32 +783,75 @@ public class MainFrame extends javax.swing.JFrame {
         updateWalletWindow();
     }//GEN-LAST:event_jComboBox6ActionPerformed
 
-    private void jComboBox6PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jComboBox6PropertyChange
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox6PropertyChange
-
-    private void TablaCarteraPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_TablaCarteraPropertyChange
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TablaCarteraPropertyChange
-
-    private void saveWalletButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveWalletButtonActionPerformed
-        notSavedChanges = false;
-        manager.saveCurrentWalletToFile();
-    }//GEN-LAST:event_saveWalletButtonActionPerformed
-
-    private void deleteOptionsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteOptionsButtonActionPerformed
-        deleteOptionsFromWallet();
+    private void savePutOptionsToWalletButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savePutOptionsToWalletButtonActionPerformed
+        int[] rows = TablaOpcionesPUT.getSelectedRows();
+        if (currentlyOpenWallet == -1) {
+            int ret = popOpenOrCreateWalletDialog();
+            if(ret <0 ||ret >1) return;
+        }
         notSavedChanges = true;
-        
-    }//GEN-LAST:event_deleteOptionsButtonActionPerformed
+        for (int row : rows) {
+            if(row>0)
+            manager.addOptionToCurrentWallet(putOptionsToShow.Opciones.get(row-1));
+        }
+        showWalletOnTable(manager.getCurrentWalletIndex());
+        saveWalletButton.setEnabled(true);
+    }//GEN-LAST:event_savePutOptionsToWalletButtonActionPerformed
 
-    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
-        popOpenWalletWindow();
-    }//GEN-LAST:event_jMenu1ActionPerformed
+    private void jComboBox3PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jComboBox3PropertyChange
 
-    private void SaveWalletMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveWalletMenuItemActionPerformed
-        manager.saveAllWalletsToFile();
-    }//GEN-LAST:event_SaveWalletMenuItemActionPerformed
+    }//GEN-LAST:event_jComboBox3PropertyChange
+
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+        currMaxDatePUT = (String) jComboBox3.getSelectedItem();
+        filterPUTOptionsByDate();
+    }//GEN-LAST:event_jComboBox3ActionPerformed
+
+    private void TablaOpcionesPUTPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_TablaOpcionesPUTPropertyChange
+
+    }//GEN-LAST:event_TablaOpcionesPUTPropertyChange
+
+    private void jComboBox2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jComboBox2PropertyChange
+
+    }//GEN-LAST:event_jComboBox2PropertyChange
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        currMinDatePUT = (String) jComboBox2.getSelectedItem();
+        filterPUTOptionsByDate();
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void saveCallOptionsToWalletButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveCallOptionsToWalletButtonActionPerformed
+        int[] rows = TablaOpcionesCALL.getSelectedRows();
+        if (currentlyOpenWallet == -1) {
+            int ret = popOpenOrCreateWalletDialog();
+            if(ret <0 ||ret >1) return;
+        }
+        notSavedChanges = true;
+        for (int row : rows) {
+            if(row>0)
+            manager.addOptionToCurrentWallet(callOptionsToShow.Opciones.get(row-1));
+        }
+        showWalletOnTable(manager.getCurrentWalletIndex());
+        saveWalletButton.setEnabled(true);
+    }//GEN-LAST:event_saveCallOptionsToWalletButtonActionPerformed
+
+    private void jComboBox5PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jComboBox5PropertyChange
+
+    }//GEN-LAST:event_jComboBox5PropertyChange
+
+    private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
+        currMaxDateCALL = (String) jComboBox5.getSelectedItem();
+        filterCALLOptionsByDate();
+    }//GEN-LAST:event_jComboBox5ActionPerformed
+
+    private void jComboBox4PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jComboBox4PropertyChange
+
+    }//GEN-LAST:event_jComboBox4PropertyChange
+
+    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
+        currMinDateCALL = (String) jComboBox4.getSelectedItem();
+        filterCALLOptionsByDate();
+    }//GEN-LAST:event_jComboBox4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -931,7 +925,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1222,7 +1215,6 @@ public class MainFrame extends javax.swing.JFrame {
             jComboBox6.addItem(manager.getName(i));
         }
         jComboBox6.setSelectedIndex(currentlyOpenWallet);
-        System.out.println("element "+currentlyOpenWallet);
     }
 
     private void showWalletOnTable(int idx) {

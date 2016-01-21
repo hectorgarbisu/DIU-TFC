@@ -28,7 +28,6 @@ public class Opcion {
     public Opcion(String str){
         String[] split = str.split("><");
         for (String split1 : split) {
-            System.out.println(split1);
         }
         this.Tipo = split[0];
         this.Hora =  split[1];

@@ -70,7 +70,6 @@ public class OptionsWalletManager {
     }
 
     public void addOptionToCurrentWallet(Opcion get) {
-        System.out.println("currentWallet: " + currentOpenWallet);
         wallets[currentOpenWallet].addOption(get);
     }
 
@@ -124,6 +123,7 @@ public class OptionsWalletManager {
         String name = selectedFile.getName();
         if (walletCount> 0) {
             for (String path1 : paths) {
+                if(path1!=null)
                 if (path1.compareToIgnoreCase(path) == 0) {
                     return; //wallet already open
                 }

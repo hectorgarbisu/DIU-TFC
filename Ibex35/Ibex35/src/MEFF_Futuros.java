@@ -47,7 +47,6 @@ public class MEFF_Futuros {
     }
    
      public boolean getFutures(){
-        System.out.println("downloading futures");
          
         int trial = ntrials;
         while(trial > 0){

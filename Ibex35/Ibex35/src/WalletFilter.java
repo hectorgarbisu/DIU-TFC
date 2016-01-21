@@ -21,6 +21,6 @@ public class WalletFilter extends FileFilter {
         return false;     
     }       
     public String getDescription() {         
-        return "Tipo Cartera";     
+        return "Tipo Cartera (.wlt)";     
     } 
 }

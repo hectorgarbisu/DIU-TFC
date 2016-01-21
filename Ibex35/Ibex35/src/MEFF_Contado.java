@@ -44,7 +44,6 @@ public class MEFF_Contado {
     }
     
     public boolean getSpot(){
-        System.out.println("downloading spot");
          
         int trial = ntrials;
         while(trial > 0){
