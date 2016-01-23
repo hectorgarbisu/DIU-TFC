@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,6 +19,7 @@ public class OptionsWalletManager {
 
     private String[] paths;
     private String[] names;
+    private int[] gains;
     private OptionsWallet[] wallets;
     private int walletCount;
     private int currentOpenWallet;
@@ -26,6 +29,7 @@ public class OptionsWalletManager {
         names = new String[32];
         paths = new String[32];
         wallets = new OptionsWallet[32];
+        gains = new int[32];
     }
 
     public void createWallet(String name) {
@@ -70,6 +74,7 @@ public class OptionsWalletManager {
     }
 
     public void addOptionToCurrentWallet(Opcion get) {
+        get.setBuyDate(StringDate.today());
         wallets[currentOpenWallet].addOption(get);
     }
 
@@ -97,6 +102,7 @@ public class OptionsWalletManager {
         OptionsWallet wal = wallets[idx];
         try {
             PrintWriter writer = new PrintWriter(paths[idx], "UTF-8");
+            writer.println(names[idx]);
             for (Opcion opt : wal.getOptions()) {
                 writer.println(opt.toString());
             }
@@ -141,6 +147,7 @@ public class OptionsWalletManager {
         try {
             String sCurrentLine;
             br = new BufferedReader(new FileReader(path));
+            br.readLine();
             while ((sCurrentLine = br.readLine()) != null) {
                 wallets[currentOpenWallet].addOption(new Opcion(sCurrentLine));
             }

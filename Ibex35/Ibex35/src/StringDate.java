@@ -1,6 +1,6 @@
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -48,6 +48,12 @@ public class StringDate {
         }
 //        System.out.println(date+" se ha convertido en "+day+" "+month+" "+year);
     }
+    public StringDate(int d, int m, int y){
+        day = d;
+        month = m;
+        year = y;
+        dateString = d+" "+months[m]+" "+y;
+    }
 
     static StringDate[] getSortedArray(Set<String> dateSet) {
         String[] str = dateSet.toArray(new String[dateSet.size()]);
@@ -78,7 +84,6 @@ public class StringDate {
         }
         return strDt;
     }
-
     public int compareTo(String date2) {
         return compareTo(new StringDate(date2));
     }
@@ -150,5 +155,14 @@ public class StringDate {
                 month = 0;
         }
     }
-
+    public static StringDate today(){
+        Date date = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        int month = cal.get(Calendar.MONTH);
+        int year = cal.get(Calendar.YEAR);
+        return new StringDate(day,month,year);
+    }
+    
 }

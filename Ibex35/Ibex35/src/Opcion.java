@@ -1,5 +1,7 @@
 
 public class Opcion {
+
+
     public String Tipo;
     public String Hora;
     public String Volumen;
@@ -11,6 +13,7 @@ public class Opcion {
     public String Vencimiento;
     public String Ejercicio;
     public StringDate vencimiento;
+    public StringDate fechaCompra;
     
     public Opcion(Opcion opt){ //copy constructor      
         this.Tipo = opt.Tipo;
@@ -24,11 +27,10 @@ public class Opcion {
         this.Vencimiento = opt.Vencimiento;
         this.Ejercicio = opt.Ejercicio;
         this.vencimiento = opt.vencimiento;
+        this.fechaCompra = opt.fechaCompra;
     }
     public Opcion(String str){
         String[] split = str.split("><");
-        for (String split1 : split) {
-        }
         this.Tipo = split[0];
         this.Hora =  split[1];
         this.Volumen = split[2];
@@ -39,20 +41,17 @@ public class Opcion {
         this.Venta_Precio = split[7];
         this.Vencimiento = split[8];
         this.Ejercicio = split[9];
-        this.Vencimiento = split[10];
         this.vencimiento = new StringDate(Vencimiento);
+        if(split.length>10)
+        this.fechaCompra = new StringDate(split[10]);
     }
     public Opcion(){
     }
+    public void setBuyDate(StringDate date){
+        fechaCompra = date;
+    }
     public boolean isEqual(Opcion opt){
         if(opt.Tipo.compareTo(Tipo)!=0)return false;
-        if(opt.Hora.compareTo(Hora)!=0)return false;
-        if(opt.Volumen.compareTo(Volumen)!=0)return false;
-        if(opt.Ultimo.compareTo(Ultimo)!=0)return false;
-        if(opt.Compra_Vol.compareTo(Compra_Vol)!=0)return false;
-        if(opt.Compra_Precio.compareTo(Compra_Precio)!=0)return false;
-        if(opt.Venta_Vol.compareTo(Venta_Vol)!=0)return false;
-        if(opt.Venta_Precio.compareTo(Venta_Precio)!=0)return false;
         if(opt.Vencimiento.compareTo(Vencimiento)!=0)return false;
         if(opt.Ejercicio.compareTo(Ejercicio)!=0)return false;
         if(opt.vencimiento.compareTo(vencimiento)!=0)return false;
@@ -70,9 +69,21 @@ public class Opcion {
         str += "><"+this.Venta_Precio;
         str += "><"+this.Vencimiento;
         str += "><"+this.Ejercicio;
-        str += "><"+this.vencimiento;
+        str += "><"+this.fechaCompra;
         return str;
     }
+    public String priceDiff(String newCost) {
+        String str = newCost.replace(',','.');
+        str = str.replaceAll("[^123456789.]","");
+        if(str.compareTo("")==0) return "-";
+        Float f = Float.valueOf(str);
+        str = this.Venta_Precio.trim();
+        str = str.replaceAll("[^123456789.]","");
+        if(str.compareTo("")==0) return "-";
+        Float f2 = Float.valueOf(str);
+        return String.valueOf(f-f2);
+    }
+    
 }
 
 

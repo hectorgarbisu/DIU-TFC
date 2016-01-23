@@ -114,6 +114,8 @@ public class MainFrame extends javax.swing.JFrame {
         TablaCartera = new javax.swing.JTable();
         saveWalletButton = new javax.swing.JButton();
         deleteOptionsButton = new javax.swing.JButton();
+        gananciaLabel = new javax.swing.JLabel();
+        gainLabel = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         Fecha = new javax.swing.JTextField();
         UpdateDataButton = new javax.swing.JButton();
@@ -440,7 +442,6 @@ public class MainFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(VentanaOpcionesPUTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(VentanaOpcionesPUTLayout.createSequentialGroup()
-                                .addGap(15, 15, 15)
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -466,7 +467,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(savePutOptionsToWalletButton)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         WalletWindow.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -535,11 +536,15 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        gananciaLabel.setText("Ganancia:");
+
+        gainLabel.setText(" ");
+
         javax.swing.GroupLayout WalletWindowLayout = new javax.swing.GroupLayout(WalletWindow.getContentPane());
         WalletWindow.getContentPane().setLayout(WalletWindowLayout);
         WalletWindowLayout.setHorizontalGroup(
             WalletWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 812, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 826, Short.MAX_VALUE)
             .addGroup(WalletWindowLayout.createSequentialGroup()
                 .addGroup(WalletWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(WalletWindowLayout.createSequentialGroup()
@@ -547,10 +552,14 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(saveWalletButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(saveWalletButton))
+                        .addComponent(gananciaLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(gainLabel))
                     .addComponent(deleteOptionsButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(341, Short.MAX_VALUE))
         );
         WalletWindowLayout.setVerticalGroup(
             WalletWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -558,12 +567,14 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(WalletWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(saveWalletButton))
+                    .addComponent(saveWalletButton)
+                    .addComponent(gananciaLabel)
+                    .addComponent(gainLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(deleteOptionsButton)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout EscritorioLayout = new javax.swing.GroupLayout(Escritorio);
@@ -912,6 +923,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JInternalFrame VentanaOpcionesPUT;
     private javax.swing.JInternalFrame WalletWindow;
     private javax.swing.JButton deleteOptionsButton;
+    private javax.swing.JLabel gainLabel;
+    private javax.swing.JLabel gananciaLabel;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
     private javax.swing.JComboBox jComboBox4;
@@ -959,15 +972,12 @@ public class MainFrame extends javax.swing.JFrame {
     private void CollectData() {
         try {
             ConectionStatusLabel2.setText("actualizando contado");
-            //Notificaciones.setText("Recolectando datos ....");   
-            // actualiza la tabla de contado
             updateContado();
             ConectionStatusLabel2.setText("actualizando futuros");
             updateFutures();
             ConectionStatusLabel2.setText("actualizando opciones");
             updateOptions();
             ConectionStatusLabel2.setText(Fecha.getText());
-            //Notificaciones.setText("Datos disponibles");
         } catch (NullPointerException e) {
             ConectionStatusLabel2.setText("No se pudo completar la actualizacion");
         }
@@ -1129,7 +1139,8 @@ public class MainFrame extends javax.swing.JFrame {
         if (notSavedChanges) {
             Object[] options = {"Guardar y salir", "Salir sin guardar", "Cancelar"};
             int ret = JOptionPane.showOptionDialog(null, "Hay cambios sin guardar\n"
-                    + "¿Desea guardar los cambios antes de salir?", "Salir", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+                    + "¿Desea guardar los cambios antes de salir?", "Salir", 
+                    JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
                     null, options, options[0]);
             if (ret == 1) {
                 System.exit(0);
@@ -1223,12 +1234,19 @@ public class MainFrame extends javax.swing.JFrame {
             {null, null, null, null, null, null, null, null}
         },
         new String[]{
-            "Tipo", "Ejercicio", "Vol. Compra", "P Compra", "P Venta", "Vol. Venta", "Último", "Volumen", "Fecha vencimiento", "Hora(Madrid)"
-        });
+            "Tipo", "Ejercicio", "Precio momento compra", "Precio actual",
+            "diferencia", "Cantidad", "Fecha compra","Fecha vencimiento"});
         OptionsWallet wallet = manager.getCurrentWallet();
+        String newCost;
+        String dif = "0";
         for (Opcion o : wallet.getOptions()) {
-            Object[] newRow = {o.Tipo, o.Ejercicio, o.Compra_Vol, o.Compra_Precio,
-                o.Venta_Precio, o.Venta_Vol, o.Ultimo, o.Volumen, o.Vencimiento, o.Hora};
+            MEFF_Opciones tablaBusqueda;
+            if(o.Tipo.compareTo("CALL")==0){tablaBusqueda = callOptionsToShow;}
+            else{tablaBusqueda = putOptionsToShow;}
+            newCost = tablaBusqueda.getCurrentPrice(o);
+            dif = o.priceDiff(newCost);
+            Object[] newRow = {o.Tipo, o.Ejercicio, o.Venta_Precio, newCost, dif,
+                0, o.fechaCompra, o.Vencimiento};
             tableModelWallet.addRow(newRow);
         }
         TablaCartera.setModel(tableModelWallet);

@@ -134,4 +134,11 @@ public class MEFF_Opciones {
     public int getOptionsCount(){
         return Opciones.size();
     }
+
+    public String getCurrentPrice(Opcion o) {
+        for(Opcion curr: Opciones){
+            if(curr.isEqual(o)) return curr.Compra_Precio;
+        }
+        return "0";
+    }
 }
