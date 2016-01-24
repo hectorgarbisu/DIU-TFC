@@ -1251,7 +1251,6 @@ public class MainFrame extends javax.swing.JFrame {
             tableModelWallet.addRow(newRow);
             try{
                 cumdif += Float.parseFloat(dif);
-                System.out.println(cumdif);
             }catch(NumberFormatException e){
                 
             }
