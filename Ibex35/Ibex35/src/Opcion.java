@@ -74,11 +74,12 @@ public class Opcion {
     }
     public String priceDiff(String newCost) {
         String str = newCost.replace(',','.');
-        str = str.replaceAll("[^123456789.]","");
+        str = str.replaceAll("[^0123456789.]","");
         if(str.compareTo("")==0) return "-";
         Float f = Float.valueOf(str);
         str = this.Venta_Precio.trim();
-        str = str.replaceAll("[^123456789.]","");
+        str = str.replace(',','.');
+        str = str.replaceAll("[^0123456789.]","");
         if(str.compareTo("")==0) return "-";
         Float f2 = Float.valueOf(str);
         return String.valueOf(f-f2);

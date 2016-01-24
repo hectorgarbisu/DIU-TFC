@@ -1235,21 +1235,29 @@ public class MainFrame extends javax.swing.JFrame {
         },
         new String[]{
             "Tipo", "Ejercicio", "Precio momento compra", "Precio actual",
-            "diferencia", "Cantidad", "Fecha compra","Fecha vencimiento"});
+            "diferencia",  "Fecha compra","Fecha vencimiento"});
         OptionsWallet wallet = manager.getCurrentWallet();
         String newCost;
         String dif = "0";
+        float cumdif = 0;
         for (Opcion o : wallet.getOptions()) {
             MEFF_Opciones tablaBusqueda;
             if(o.Tipo.compareTo("CALL")==0){tablaBusqueda = callOptionsToShow;}
             else{tablaBusqueda = putOptionsToShow;}
             newCost = tablaBusqueda.getCurrentPrice(o);
             dif = o.priceDiff(newCost);
-            Object[] newRow = {o.Tipo, o.Ejercicio, o.Venta_Precio, newCost, dif,
-                0, o.fechaCompra, o.Vencimiento};
+            Object[] newRow = {o.Tipo, o.Ejercicio, o.Venta_Precio, newCost,
+                dif, o.fechaCompra, o.Vencimiento};
             tableModelWallet.addRow(newRow);
+            try{
+                cumdif += Float.parseFloat(dif);
+                System.out.println(cumdif);
+            }catch(NumberFormatException e){
+                
+            }
         }
         TablaCartera.setModel(tableModelWallet);
+        gainLabel.setText(""+cumdif);
     }
 
     private void deleteOptionsFromWallet() {
